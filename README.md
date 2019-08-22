@@ -16,6 +16,7 @@ Lightweight validation plugin in pure js
         {{ errors.username.message }}
      </span>
     <input type="text" v-model="form.username" >
+    <button v-on:click="send()">Send</button>
    </div>
   <template> 
   
