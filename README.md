@@ -2,7 +2,6 @@
 Lightweight validation plugin in pure js
 
 ## Example of ussage
-```
 ### In main.js add these lines
 ```
   import vaLittle from './vaLittle'
