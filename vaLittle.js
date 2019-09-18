@@ -27,7 +27,7 @@ function vltl(){
   this.equalGroup = (value,group) => {
     if (value.trim() && value !== false && !this.equalGroupState.hasOwnProperty(group)) {
       this.equalGroupState[group] = value;
-    }else if (value.trim() && value !== false && this.equalGroupState.hasOwnProperty(group) && value !== this.equalGroupState[group]) {
+    }else if (value.trim() && value !== false && value !== this.equalGroupState[group]) {
       delete this.equalGroupState[group];
     }
     return false;
@@ -72,9 +72,9 @@ function vltl(){
         let g = this.requireGroupState[this.rules[r].requireGroup];
         this.results[r].requireGroup =  g === true || g === undefined ? true : false;
       }
-      if (!Object.keys(this.results[r]).indexOf('equalGroup')) {
+      if (Object.keys(this.results[r]).indexOf('equalGroup')) {
         let g = this.equalGroupState[this.rules[r].equalGroup];
-        this.results[r].equalGroup =  g.length > 0 || g === undefined ? true : false;
+        this.results[r].equalGroup =  g === undefined ? true : false;
       }
       let e = Object.values(this.results[r]).indexOf(true);
       this.results[r].errors = e == -1 ? false : true;
@@ -110,7 +110,7 @@ function vltl(){
 const vaLittle = {
   install(Vue, options) {
     Vue.prototype.$vaLittle =  new vltl();
-  	Vue.mixin({
+      Vue.mixin({
       created() {
         const plugin = this.$vaLittle;
         var validate = this.$options.validate
