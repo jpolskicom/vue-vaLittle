@@ -23,6 +23,16 @@ function vltl(){
     return false;
   }
 
+  this.equalGroupState = {};
+  this.equalGroup = (value,group) => {
+    if (value.trim() && value !== false && !this.equalGroupState.hasOwnProperty(group)) {
+      this.equalGroupState[group] = value;
+    }else if (value.trim() && value !== false && this.equalGroupState.hasOwnProperty(group) && value !== this.equalGroupState[group]) {
+      delete this.equalGroupState[group];
+    }
+    return false;
+  }
+
   this.min = (value,val) => {
     return value === '' || value.length >= val ? false : true;
   }
@@ -62,6 +72,10 @@ function vltl(){
         let g = this.requireGroupState[this.rules[r].requireGroup];
         this.results[r].requireGroup =  g === true || g === undefined ? true : false;
       }
+      if (!Object.keys(this.results[r]).indexOf('equalGroup')) {
+        let g = this.equalGroupState[this.rules[r].equalGroup];
+        this.results[r].equalGroup =  g.length > 0 || g === undefined ? true : false;
+      }
       let e = Object.values(this.results[r]).indexOf(true);
       this.results[r].errors = e == -1 ? false : true;
       this.results[r].message = e == -1 ? false : this.messages[r][Object.keys(this.rules[r])[e]];
@@ -88,6 +102,7 @@ function vltl(){
     }
     this.prepareResults();
     this.requireGroupState = {};
+    this.equalGroupState = {};
     return this.results;
   }
 }
