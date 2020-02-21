@@ -103,6 +103,11 @@ Requires value from one or more inputs in group
 ```
   requireGroup:'group_name'
 ```
+### Require equal values in group
+Requires thesame values in group
+```
+  equalGroup:'group_name'
+```
 ### Post Code
 Requires a post code format XX-XXX
 ```
