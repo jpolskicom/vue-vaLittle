@@ -1,0 +1,33 @@
+{
+  "name": "vue-valittle",
+  "version": "1.0.0",
+  "description": "Lightweight VUE validation plugin\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D simple \u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[Dand simple validation plugin for VUE JS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jpolskicom/vue-vaLittle.git"
+  },
+  "keywords": [
+    "vue",
+    "validation",
+    "plugin",
+    "simple",
+    "light",
+    "simple",
+    "light",
+    "jpolski",
+    "pure",
+    "js",
+    "es6",
+    "component"
+  ],
+  "author": "Jacek Polski",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jpolskicom/vue-vaLittle/issues"
+  },
+  "homepage": "https://github.com/jpolskicom/vue-vaLittle#readme"
+}

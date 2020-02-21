@@ -4,7 +4,7 @@ Lightweight validation plugin in pure js
 ## Example of ussage
 ### In main.js add these lines
 ```
-  import vaLittle from './vaLittle'
+  import vaLittle from 'vue-valittle'
   Vue.use(vaLittle);
 ```
 
@@ -18,8 +18,8 @@ Lightweight validation plugin in pure js
     <input type="text" v-model="form.username" >
     <button v-on:click="send()">Send</button>
    </div>
-  <template> 
-  
+  <template>
+
   <script>
       export default {
         name: 'loginForm',

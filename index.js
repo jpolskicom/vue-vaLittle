@@ -1,22 +1,22 @@
-function vltl(){
+function vltl() {
   // rules
   this.required = value => {
     return !value.trim();
   }
 
   this.email = value => {
-    return value === '' || value.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/) ? false : true;
+    return value.trim() === '' || value.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/) ? false : true;
   }
 
   this.phone = value => {
-    return value === '' || value.match(/^(?:\(?\?)?(?:[-\.\(\)\s]*(\d)){9}\)?$/) ? false : true;
+    return value.trim() === '' || value.match(/^(?:\(?\?)?(?:[-\.\(\)\s]*(\d)){9}\)?$/) ? false : true;
   }
 
   this.postCode = value => {
-    return value === '' || value.match(/^([0-9]{2}\-[0-9]{3})$/) ? false : true;
+    return value.trim() === '' || value.match(/^([0-9]{2}\-[0-9]{3})$/) ? false : true;
   }
   this.requireGroupState = {};
-  this.requireGroup = (value,group) => {
+  this.requireGroup = (value, group) => {
     if (value.trim() && value !== false && !this.requireGroupState.hasOwnProperty(group)) {
       this.requireGroupState[group] = false;
     }
@@ -24,41 +24,41 @@ function vltl(){
   }
 
   this.equalGroupState = {};
-  this.equalGroup = (value,group) => {
+  this.equalGroup = (value, group) => {
     if (value.trim() && value !== false && !this.equalGroupState.hasOwnProperty(group)) {
       this.equalGroupState[group] = value;
-    }else if (value.trim() && value !== false && value !== this.equalGroupState[group]) {
+    } else if (value.trim() && value !== false && value !== this.equalGroupState[group]) {
       delete this.equalGroupState[group];
     }
     return false;
   }
 
-  this.min = (value,val) => {
-    return value === '' || value.length >= val ? false : true;
+  this.min = (value, val) => {
+    return value.trim() === '' || value.length >= val ? false : true;
   }
 
-  this.max = (value,val) => {
-    return value === '' || value.length <= val ? false : true;
+  this.max = (value, val) => {
+    return value.trim() === '' || value.length <= val ? false : true;
   }
 
-  this.minVal = (value,val) => {
-    return value === '' || value >= val  ? false : true;
+  this.minVal = (value, val) => {
+    return value.trim() === '' || value >= val ? false : true;
   }
 
-  this.maxVal = (value,val) => {
-    return value === '' || value <= val ? false : true;
+  this.maxVal = (value, val) => {
+    return value.trim() === '' || value <= val ? false : true;
   }
 
   this.number = value => {
-    return value === '' || value.match(/^([0-9 -]+)$/) ? false : true;
+    return value.trim() === '' || value.match(/^([0-9 -]+)$/) ? false : true;
   }
 
   this.text = value => {
-    return value === '' || value.match(/^([a-zA-Z _-]+)$/) ? false : true;
+    return value.trim() === '' || value.match(/^([a-zA-Z _-]+)$/) ? false : true;
   }
 
-  this.regex = (value,val) => {
-    return value === '' || value.match(new RegExp(val)) ? false : true;
+  this.regex = (value, val) => {
+    return value.trim() === '' || value.match(new RegExp(val)) ? false : true;
   }
 
   // check
@@ -67,20 +67,27 @@ function vltl(){
   this.results = {}
 
   this.prepareResults = () => {
-    for(let r in this.results){
+    for (let r in this.results) {
       if (!Object.keys(this.results[r]).indexOf('requireGroup')) {
         let g = this.requireGroupState[this.rules[r].requireGroup];
-        this.results[r].requireGroup =  g === true || g === undefined ? true : false;
+        this.results[r].requireGroup = g === true || g === undefined ? true : false;
       }
+
+
+
       if (Object.keys(this.results[r]).indexOf('equalGroup') > -1 && !this.equalGroupState[this.rules[r].equalGroup]) {
         let g = this.equalGroupState[this.rules[r].equalGroup];
-        this.results[r].equalGroup =  g === undefined ? true : false;
-      } 
+        this.results[r].equalGroup = g === undefined ? true : false;
+      }
       let e = Object.values(this.results[r]).indexOf(true);
+
       this.results[r].errors = e == -1 ? false : true;
       this.results[r].message = e == -1 ? false : this.messages[r][Object.keys(this.rules[r])[e]];
+
     }
-    let e = Object.keys(this.results).map(e => { return this.results[e].errors; }).indexOf(true);
+    let e = Object.keys(this.results).map(e => {
+      return this.results[e].errors;
+    }).indexOf(true);
     this.results.errors = e !== -1 ? true : false;
   }
 
@@ -94,8 +101,8 @@ function vltl(){
         let v = t.rules[r][rule];
         if (v === true) {
           var error = this[rule](data[r]);
-        }else if (v !== false) {
-          var error = this[rule](data[r],v);
+        } else if (v !== false) {
+          var error = this[rule](data[r], v);
         }
         this.results[r][rule] = error;
       })
@@ -109,8 +116,8 @@ function vltl(){
 
 const vaLittle = {
   install(Vue, options) {
-    Vue.prototype.$vaLittle =  new vltl();
-      Vue.mixin({
+    Vue.prototype.$vaLittle = new vltl();
+    Vue.mixin({
       created() {
         const plugin = this.$vaLittle;
         var validate = this.$options.validate
