@@ -1,7 +1,7 @@
 {
   "name": "vue-valittle",
-  "version": "1.0.0",
-  "description": "Lightweight VUE validation plugin\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D simple \u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[Dand simple validation plugin for VUE JS",
+  "version": "1.0.2",
+  "description": "Simple, lightweight validation plugin for VUE JS",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -29,5 +29,5 @@
   "bugs": {
     "url": "https://github.com/jpolskicom/vue-vaLittle/issues"
   },
-  "homepage": "https://github.com/jpolskicom/vue-vaLittle#readme"
+  "homepage": "http://vue-valittle.jpolski.com"
 }
