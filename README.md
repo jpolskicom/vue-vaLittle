@@ -64,10 +64,10 @@ As param set custom regular expession
   regex:'/^([a-zA-Z _-]+)$/'
 ```
 ### Callback
-Test by custom function. In this example I pass through 'v' vaLittle's this. 'v.formData' is form object with inputs values.
+Test by custom function.At this example I pass through 'v' vaLittle's this. 'v.formData' is form object with inputs values.
 Example:
 ```
-callback:(vltlThis) => {
+callback:(v) => {
 
   // check if input is not empty
   if (!v.required(v.formData.name)) {
