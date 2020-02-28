@@ -61,7 +61,7 @@ function vltl() {
     return value.trim() === '' || value.match(new RegExp(val)) ? false : true;
   }
 
-  this.callback = (cb) => {
+  this.callback = (value, cb) => {
     return cb();
   }
 
@@ -77,12 +77,11 @@ function vltl() {
         this.results[r].requireGroup = g === true || g === undefined ? true : false;
       }
 
-
-
       if (Object.keys(this.results[r]).indexOf('equalGroup') > -1 && !this.equalGroupState[this.rules[r].equalGroup]) {
         let g = this.equalGroupState[this.rules[r].equalGroup];
         this.results[r].equalGroup = g === undefined ? true : false;
       }
+
       let e = Object.values(this.results[r]).indexOf(true);
 
       this.results[r].errors = e == -1 ? false : true;

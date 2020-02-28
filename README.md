@@ -67,7 +67,7 @@ As param set custom regular expession
 Test by custom function
 ```
   callback: function(){
-    if(true){
+    if(this.$vaLittle.text(this.date.dsfsdf)){
       return false; // if no errors
     }else{
       return true; // if errors

@@ -1,6 +1,6 @@
 {
   "name": "vue-valittle",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Simple, lightweight validation plugin for VUE JS",
   "main": "index.js",
   "scripts": {
