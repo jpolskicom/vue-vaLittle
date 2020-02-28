@@ -63,6 +63,17 @@ As param set custom regular expession
 ```
   regex:'/^([a-zA-Z _-]+)$/'
 ```
+### Callback
+Test by custom function
+```
+  callback: function(){
+    if(true){
+      return false; // if no errors
+    }else{
+      return true; // if errors
+    }
+  }
+```
 ### Text only
 Accepts only upper and lower letters
 ```

@@ -61,6 +61,10 @@ function vltl() {
     return value.trim() === '' || value.match(new RegExp(val)) ? false : true;
   }
 
+  this.callback = (cb) => {
+    return cb();
+  }
+
   // check
   this.rules = {};
   this.messages = {};
