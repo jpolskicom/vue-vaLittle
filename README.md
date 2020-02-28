@@ -64,15 +64,25 @@ As param set custom regular expession
   regex:'/^([a-zA-Z _-]+)$/'
 ```
 ### Callback
-Test by custom function
+Test by custom function. In this example I pass through 'v' vaLittle's this. 'v.formData' is form object with inputs values.
+Example:
 ```
-  callback: function(){
-    if(this.$vaLittle.text(this.date.dsfsdf)){
-      return false; // if no errors
-    }else{
-      return true; // if errors
-    }
+callback:(vltlThis) => {
+
+  // check if input is not empty
+  if (!v.required(v.formData.name)) {
+
+    // add new rule to another input if 'name' input is not empty
+    v.rules.surname = {required:true};
+
+    //Let's see what is inside vaLittle now
+    console.log(v);
+
+  }else{
+    console.log('true means error');
   }
+
+}
 ```
 ### Text only
 Accepts only upper and lower letters

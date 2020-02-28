@@ -62,7 +62,7 @@ function vltl() {
   }
 
   this.callback = (value, cb) => {
-    return cb();
+    return cb(this);
   }
 
   // check
