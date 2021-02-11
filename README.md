@@ -12,8 +12,8 @@ Lightweight validation plugin in pure js
 ```
   <template>
    <div>
-     <span class="text-error" v-if="errors.username && errors.username.errors">
-        {{ errors.username.message }}
+     <span class="text-error" v-if="$vaLittle.getError('username').errors">
+        $vaLittle.getError('username').message
      </span>
     <input type="text" v-model="form.username" >
     <button v-on:click="send()">Send</button>
@@ -34,19 +34,19 @@ Lightweight validation plugin in pure js
         validate: {
           messages:{
             username:{
-              required: 'To pole jest wymagane!'
+              require: 'To pole jest wymagane!'
             }
           },
           rules:{
             username:{
-              required:true
+              require:true
             }
           }
         },
         methods:{
           send: function() {
             this.errors = this.$vaLittle.check(this.form);
-            if (!this.errors.errors) {
+            if (this.$vaLittle.isValid) {
               console.log('IS OK!');
             }else{
               console.log('IS NOT OK!');

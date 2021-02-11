@@ -1,6 +1,6 @@
-function vltl() {
+ function vltl() {
   // rules
-  this.required = value => {
+  this.require = value => {
     return !value.trim();
   }
 
@@ -85,7 +85,7 @@ function vltl() {
       let e = Object.values(this.results[r]).indexOf(true);
 
       this.results[r].errors = e == -1 ? false : true;
-      this.results[r].message = e == -1 ? false : this.messages[r][Object.keys(this.rules[r])[e]];
+      this.results[r].message = e == -1 ? '' : this.messages[r][Object.keys(this.rules[r])[e]];
 
     }
     let e = Object.keys(this.results).map(e => {
@@ -102,10 +102,13 @@ function vltl() {
       var error = false;
       Object.keys(t.rules[r]).forEach((rule) => {
         let v = t.rules[r][rule];
+        console.log(r)
+        console.log(data[r]);
+        console.log('----');
         if (v === true) {
-          var error = this[rule](data[r]);
+          var error = typeof data[r] !== "undefined"? this[rule](data[r]): false;
         } else if (v !== false) {
-          var error = this[rule](data[r], v);
+          var error = typeof data[r] !== "undefined"? this[rule](data[r], v): false;
         }
         this.results[r][rule] = error;
       })
@@ -114,7 +117,14 @@ function vltl() {
     this.requireGroupState = {};
     this.equalGroupState = {};
     return this.results;
+  },
+
+  this.getError = data => {
+    return this.results[data]?this.results[data]:{message:''}
   }
+
+  this.isValid =  this.errors?!this.errors.errors:false
+  
 }
 
 const vaLittle = {
