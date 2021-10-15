@@ -1,7 +1,7 @@
  function vltl() {
   // rules
   this.require = value => {
-    return !value.trim();
+    return !value || !value.trim();
   }
 
   this.email = value => {
@@ -102,9 +102,6 @@
       var error = false;
       Object.keys(t.rules[r]).forEach((rule) => {
         let v = t.rules[r][rule];
-        console.log(r)
-        console.log(data[r]);
-        console.log('----');
         if (v === true) {
           var error = typeof data[r] !== "undefined"? this[rule](data[r]): false;
         } else if (v !== false) {
@@ -129,11 +126,12 @@
 
 const vaLittle = {
   install(Vue, options) {
-    Vue.prototype.$vaLittle = new vltl();
+    Vue.prototype.$vaLittle = () => false;
     Vue.mixin({
       created() {
+        this.$vaLittle = new vltl();
         const plugin = this.$vaLittle;
-        var validate = this.$options.validate
+        let validate = this.$options.validate
         if (validate) {
           plugin.rules = validate.rules;
           plugin.messages = validate.messages;
