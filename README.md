@@ -1,11 +1,21 @@
 # vaLittle
 Lightweight validation plugin in pure js
 
-## Example of ussage
-### In main.js add these lines
+## Example of ussage:
+
+### VUE
+In main.js add these lines
 ```
   import vaLittle from 'vue-valittle'
   Vue.use(vaLittle);
+```
+
+### Nuxt
+Add line in nuxt.config.js
+```
+  plugins: [
+    { src: 'node_modules/vue-valittle/nuxt.js' },
+  ],
 ```
 
 ### In your component:
@@ -143,12 +153,4 @@ Requires a valid phone
 Requires a valid e-mail
 ```
   email:true
-```
-
-## Nuxt ussage:
-Add line in nuxt.config.js
-```
-  plugins: [
-    { src: 'node_modules/vue-valittle/nuxt.js' },
-  ],
 ```
