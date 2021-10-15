@@ -144,3 +144,11 @@ Requires a valid e-mail
 ```
   email:true
 ```
+
+## Nuxt ussage:
+Add line in nuxt.config.js
+```
+  plugins: [
+    { src: 'node_modules/vue-valittle/nuxt.js' },
+  ],
+```
