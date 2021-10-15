@@ -1,7 +1,7 @@
  function vltl() {
   // rules
   this.require = value => {
-    return !value || !value.trim();
+    return value+''.trim() === '';
   }
 
   this.email = value => {
