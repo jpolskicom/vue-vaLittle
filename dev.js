@@ -1,7 +1,7 @@
- function vltl() {
+function vltl() {
   // rules
   this.require = value => {
-    return value+''.trim() === '';
+    return value + ''.trim() === '';
   }
 
   this.email = value => {
@@ -50,7 +50,7 @@
   }
 
   this.number = value => {
-    return String(value).trim() === '' || value.match(/^([0-9 -]+)$/) ? false : true;
+    return String(value).trim() === '' || String(value).match(/^([0-9 -]+)$/) ? false : true;
   }
 
   this.text = value => {
@@ -103,9 +103,9 @@
       Object.keys(t.rules[r]).forEach((rule) => {
         let v = t.rules[r][rule];
         if (v === true) {
-          var error = typeof data[r] !== "undefined"? this[rule](data[r]): false;
+          var error = typeof data[r] !== "undefined" ? this[rule](data[r]) : false;
         } else if (v !== false) {
-          var error = typeof data[r] !== "undefined"? this[rule](data[r], v): false;
+          var error = typeof data[r] !== "undefined" ? this[rule](data[r], v) : false;
         }
         this.results[r][rule] = error;
       })
@@ -116,12 +116,12 @@
     return this.results;
   },
 
-  this.getError = data => {
-    return this.results[data]?this.results[data]:{message:''}
-  }
+    this.getError = data => {
+      return this.results[data] ? this.results[data] : { message: '' }
+    }
 
-  this.isValid =  this.errors?!this.errors.errors:false
-  
+  this.isValid = this.errors ? !this.errors.errors : false
+
 }
 
 const vaLittle = {

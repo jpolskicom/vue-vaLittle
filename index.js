@@ -1,1 +1,196 @@
-"use strict"; function vltl() { this.require = (t => t + "".trim() === ""), this.email = (t => "" !== t.trim() && !t.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)), this.phone = (t => "" !== t.trim() && !t.match(/^(?:\(?\?)?(?:[-\.\(\)\s]*(\d)){9}\)?$/)), this.postCode = (t => "" !== t.trim() && !t.match(/^([0-9]{2}\-[0-9]{3})$/)), this.requireGroupState = {}, this.requireGroup = ((t, e) => (t.trim() && !1 !== t && !this.requireGroupState.hasOwnProperty(e) && (this.requireGroupState[e] = !1), !1)), this.equalGroupState = {}, this.equalGroup = ((t, e) => (t.trim() && !1 !== t && !this.equalGroupState.hasOwnProperty(e) ? this.equalGroupState[e] = t : t.trim() && !1 !== t && t !== this.equalGroupState[e] && delete this.equalGroupState[e], !1)), this.min = ((t, e) => !("" === t.trim() || t.length >= e)), this.max = ((t, e) => !("" === t.trim() || t.length <= e)), this.minVal = ((t, e) => !("" === String(t).trim() || t >= e)), this.maxVal = ((t, e) => !("" === String(t).trim() || t <= e)), this.number = (t => "" !== String(t).trim() && !t.match(/^([0-9 -]+)$/)), this.text = (t => "" !== t.trim() && !t.match(/^([a-zA-Z _-]+)$/)), this.regex = ((t, e) => "" !== t.trim() && !t.match(new RegExp(e))), this.callback = ((t, e) => e(this)), this.rules = {}, this.messages = {}, this.results = {}, this.prepareResults = (() => { for (let t in this.results) { if (!Object.keys(this.results[t]).indexOf("requireGroup")) { let e = this.requireGroupState[this.rules[t].requireGroup]; this.results[t].requireGroup = !0 === e || void 0 === e } if (Object.keys(this.results[t]).indexOf("equalGroup") > -1 && !this.equalGroupState[this.rules[t].equalGroup]) { let e = this.equalGroupState[this.rules[t].equalGroup]; this.results[t].equalGroup = void 0 === e } let e = Object.values(this.results[t]).indexOf(!0); this.results[t].errors = -1 != e, this.results[t].message = -1 == e ? "" : this.messages[t][Object.keys(this.rules[t])[e]] } let t = Object.keys(this.results).map(t => this.results[t].errors).indexOf(!0); this.results.errors = -1 !== t }), this.check = (t => { this.results = {}; var e = this; for (let s in e.rules) { this.results[s] = {}; Object.keys(e.rules[s]).forEach(r => { let i = e.rules[s][r]; if (!0 === i) var u = void 0 !== t[s] && this[r](t[s]); else if (!1 !== i) u = void 0 !== t[s] && this[r](t[s], i); this.results[s][r] = u }) } return this.prepareResults(), this.requireGroupState = {}, this.equalGroupState = {}, this.results }), this.getError = (t => this.results[t] ? this.results[t] : { message: "" }), this.isValid = !!this.errors && !this.errors.errors } Object.defineProperty(exports, "__esModule", { value: !0 }), exports.default = void 0; const vaLittle = { install(t, e) { t.prototype.$vaLittle = (() => !1), t.mixin({ created() { this.$vaLittle = new vltl; const t = this.$vaLittle; let e = this.$options.validate; e && (t.rules = e.rules, t.messages = e.messages) } }) } }; var _default = vaLittle; exports.default = _default;
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = void 0;
+
+function vltl() {
+    // rules
+    this.require = (value) => {
+        return value + "".trim() === "";
+    };
+
+    this.email = (value) => {
+        return value.trim() === "" ||
+            value.match(
+                /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+            )
+            ? false
+            : true;
+    };
+
+    this.phone = (value) => {
+        return value.trim() === "" ||
+            value.match(/^(?:\(?\?)?(?:[-\.\(\)\s]*(\d)){9}\)?$/)
+            ? false
+            : true;
+    };
+
+    this.postCode = (value) => {
+        return value.trim() === "" || value.match(/^([0-9]{2}\-[0-9]{3})$/)
+            ? false
+            : true;
+    };
+
+    this.requireGroupState = {};
+
+    this.requireGroup = (value, group) => {
+        if (
+            value.trim() &&
+            value !== false &&
+            !this.requireGroupState.hasOwnProperty(group)
+        ) {
+            this.requireGroupState[group] = false;
+        }
+
+        return false;
+    };
+
+    this.equalGroupState = {};
+
+    this.equalGroup = (value, group) => {
+        if (
+            value.trim() &&
+            value !== false &&
+            !this.equalGroupState.hasOwnProperty(group)
+        ) {
+            this.equalGroupState[group] = value;
+        } else if (
+            value.trim() &&
+            value !== false &&
+            value !== this.equalGroupState[group]
+        ) {
+            delete this.equalGroupState[group];
+        }
+
+        return false;
+    };
+
+    this.min = (value, val) => {
+        return value.trim() === "" || value.length >= val ? false : true;
+    };
+
+    this.max = (value, val) => {
+        return value.trim() === "" || value.length <= val ? false : true;
+    };
+
+    this.minVal = (value, val) => {
+        return String(value).trim() === "" || value >= val ? false : true;
+    };
+
+    this.maxVal = (value, val) => {
+        return String(value).trim() === "" || value <= val ? false : true;
+    };
+
+    this.number = (value) => {
+        return String(value).trim() === "" || String(value).match(/^([0-9 -]+)$/)
+            ? false
+            : true;
+    };
+
+    this.text = (value) => {
+        return value.trim() === "" || value.match(/^([a-zA-Z _-]+)$/)
+            ? false
+            : true;
+    };
+
+    this.regex = (value, val) => {
+        return value.trim() === "" || value.match(new RegExp(val)) ? false : true;
+    };
+
+    this.callback = (value, cb) => {
+        return cb(this);
+    }; // check
+
+    this.rules = {};
+    this.messages = {};
+    this.results = {};
+
+    this.prepareResults = () => {
+        for (let r in this.results) {
+            if (!Object.keys(this.results[r]).indexOf("requireGroup")) {
+                let g = this.requireGroupState[this.rules[r].requireGroup];
+                this.results[r].requireGroup =
+                    g === true || g === undefined ? true : false;
+            }
+
+            if (
+                Object.keys(this.results[r]).indexOf("equalGroup") > -1 &&
+                !this.equalGroupState[this.rules[r].equalGroup]
+            ) {
+                let g = this.equalGroupState[this.rules[r].equalGroup];
+                this.results[r].equalGroup = g === undefined ? true : false;
+            }
+
+            let e = Object.values(this.results[r]).indexOf(true);
+            this.results[r].errors = e == -1 ? false : true;
+            this.results[r].message =
+                e == -1 ? "" : this.messages[r][Object.keys(this.rules[r])[e]];
+        }
+
+        let e = Object.keys(this.results)
+            .map((e) => {
+                return this.results[e].errors;
+            })
+            .indexOf(true);
+        this.results.errors = e !== -1 ? true : false;
+    };
+
+    (this.check = (data) => {
+        this.results = {};
+        var t = this;
+
+        for (let r in t.rules) {
+            this.results[r] = {};
+            var error = false;
+            Object.keys(t.rules[r]).forEach((rule) => {
+                let v = t.rules[r][rule];
+
+                if (v === true) {
+                    var error =
+                        typeof data[r] !== "undefined" ? this[rule](data[r]) : false;
+                } else if (v !== false) {
+                    var error =
+                        typeof data[r] !== "undefined" ? this[rule](data[r], v) : false;
+                }
+
+                this.results[r][rule] = error;
+            });
+        }
+
+        this.prepareResults();
+        this.requireGroupState = {};
+        this.equalGroupState = {};
+        return this.results;
+    }),
+        (this.getError = (data) => {
+            return this.results[data]
+                ? this.results[data]
+                : {
+                    message: ""
+                };
+        });
+    this.isValid = this.errors ? !this.errors.errors : false;
+}
+
+const vaLittle = {
+    install(Vue, options) {
+        Vue.prototype.$vaLittle = () => false;
+
+        Vue.mixin({
+            created() {
+                this.$vaLittle = new vltl();
+                const plugin = this.$vaLittle;
+                let validate = this.$options.validate;
+
+                if (validate) {
+                    plugin.rules = validate.rules;
+                    plugin.messages = validate.messages;
+                }
+            }
+        });
+    }
+};
+var _default = vaLittle;
+exports.default = _default;
