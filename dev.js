@@ -42,15 +42,15 @@
   }
 
   this.minVal = (value, val) => {
-    return value.trim() === '' || value >= val ? false : true;
+    return String(value).trim() === '' || value >= val ? false : true;
   }
 
   this.maxVal = (value, val) => {
-    return value.trim() === '' || value <= val ? false : true;
+    return String(value).trim() === '' || value <= val ? false : true;
   }
 
   this.number = value => {
-    return value.trim() === '' || value.match(/^([0-9 -]+)$/) ? false : true;
+    return String(value).trim() === '' || value.match(/^([0-9 -]+)$/) ? false : true;
   }
 
   this.text = value => {

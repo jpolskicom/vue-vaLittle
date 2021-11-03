@@ -1,6 +1,6 @@
 {
   "name": "vue-valittle",
-  "version": "1.3.0",
+  "version": "1.3.2",
   "description": "Simple, lightweight validation plugin for VUE JS",
   "main": "index.js",
   "scripts": {
@@ -22,7 +22,10 @@
     "pure",
     "js",
     "es6",
-    "component"
+    "component",
+    "Nuxt",
+    "Nuxtjs",
+    "SSR"
   ],
   "author": "Jacek Polski",
   "license": "ISC",
