@@ -12,7 +12,7 @@ function vltl() {
     };
 
     this.email = (value) => {
-        return value.trim() === "" ||
+        return value + "".trim() === "" ||
             value.match(
                 /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
             )
@@ -21,14 +21,14 @@ function vltl() {
     };
 
     this.phone = (value) => {
-        return value.trim() === "" ||
+        return value + "".trim() === "" ||
             value.match(/^(?:\(?\?)?(?:[-\.\(\)\s]*(\d)){9}\)?$/)
             ? false
             : true;
     };
 
     this.postCode = (value) => {
-        return value.trim() === "" || value.match(/^([0-9]{2}\-[0-9]{3})$/)
+        return value + "".trim() === "" || value.match(/^([0-9]{2}\-[0-9]{3})$/)
             ? false
             : true;
     };
@@ -68,11 +68,11 @@ function vltl() {
     };
 
     this.min = (value, val) => {
-        return value.trim() === "" || value.length >= val ? false : true;
+        return String(value).trim() === "" || value.length >= val ? false : true;
     };
 
     this.max = (value, val) => {
-        return value.trim() === "" || value.length <= val ? false : true;
+        return String(value).trim() === "" || value.length <= val ? false : true;
     };
 
     this.minVal = (value, val) => {
@@ -90,13 +90,13 @@ function vltl() {
     };
 
     this.text = (value) => {
-        return value.trim() === "" || value.match(/^([a-zA-Z _-]+)$/)
+        return value + "".trim() === "" || value.match(/^([a-zA-Z _-]+)$/)
             ? false
             : true;
     };
 
     this.regex = (value, val) => {
-        return value.trim() === "" || value.match(new RegExp(val)) ? false : true;
+        return value + "".trim() === "" || value.match(new RegExp(val)) ? false : true;
     };
 
     this.callback = (value, cb) => {
