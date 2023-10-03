@@ -30,7 +30,7 @@ function vltl() {
 
   this.requireGroup = (value, group) => {
     if (
-      value.trim() &&
+      value + "".trim() &&
       value !== false &&
       !this.requireGroupState.hasOwnProperty(group)
     ) {
@@ -44,14 +44,14 @@ function vltl() {
 
   this.equalGroup = (value, group) => {
     if (
-      value.trim() &&
       value !== false &&
+      value.trim() &&
       !this.equalGroupState.hasOwnProperty(group)
     ) {
       this.equalGroupState[group] = value;
     } else if (
-      value.trim() &&
       value !== false &&
+      value.trim() &&
       value !== this.equalGroupState[group]
     ) {
       delete this.equalGroupState[group];

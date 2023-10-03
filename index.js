@@ -13,7 +13,7 @@ function vltl() {
 
     this.email = (value) => {
         return value + "".trim() === "" ||
-        String(value).match(
+            String(value).match(
                 /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
             )
             ? false
@@ -22,7 +22,7 @@ function vltl() {
 
     this.phone = (value) => {
         return value + "".trim() === "" ||
-        String(value).match(/^(?:\(?\?)?(?:[-\.\(\)\s]*(\d)){9}\)?$/)
+            String(value).match(/^(?:\(?\?)?(?:[-\.\(\)\s]*(\d)){9}\)?$/)
             ? false
             : true;
     };
@@ -37,7 +37,7 @@ function vltl() {
 
     this.requireGroup = (value, group) => {
         if (
-            value.trim() &&
+            value + "".trim() &&
             value !== false &&
             !this.requireGroupState.hasOwnProperty(group)
         ) {
@@ -51,14 +51,14 @@ function vltl() {
 
     this.equalGroup = (value, group) => {
         if (
-            value.trim() &&
             value !== false &&
+            value.trim() &&
             !this.equalGroupState.hasOwnProperty(group)
         ) {
             this.equalGroupState[group] = value;
         } else if (
-            value.trim() &&
             value !== false &&
+            value.trim() &&
             value !== this.equalGroupState[group]
         ) {
             delete this.equalGroupState[group];
