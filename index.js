@@ -12,7 +12,7 @@ function vltl() {
     };
 
     this.email = (value) => {
-        return String(value).trim() === "" ||
+        return typeof value !== "string" || String(value).trim() === "" ||
             String(value).match(
                 /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
             )
@@ -21,14 +21,14 @@ function vltl() {
     };
 
     this.phone = (value) => {
-        return String(value).trim() === "" ||
+        return typeof value !== "string" || String(value).trim() === "" ||
             String(value).match(/^(?:\(?\?)?(?:[-\.\(\)\s]*(\d)){9}\)?$/)
             ? false
             : true;
     };
 
     this.postCode = (value) => {
-        return value + "".trim() === "" || String(value).match(/^([0-9]{2}\-[0-9]{3})$/)
+        return typeof value !== "string" || value + "".trim() === "" || String(value).match(/^([0-9]{2}\-[0-9]{3})$/)
             ? false
             : true;
     };
