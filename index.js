@@ -171,7 +171,7 @@ function vltl() {
                     message: ""
                 };
         });
-    this.isValid = this.errors ? !this.errors.errors : false;
+    this.isValid = this.errors ? this.errors.errors : false;
 }
 
 const vaLittle = {
