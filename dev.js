@@ -5,7 +5,7 @@ function vltl() {
   };
 
   this.email = (value) => {
-    return value + "".trim() === "" ||
+    return String(value).trim() === "" ||
       String(value).match(
         /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       )
@@ -14,7 +14,7 @@ function vltl() {
   };
 
   this.phone = (value) => {
-    return value + "".trim() === "" ||
+    return String(value).trim() === "" ||
       String(value).match(/^(?:\(?\?)?(?:[-\.\(\)\s]*(\d)){9}\)?$/)
       ? false
       : true;
